@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Apt
 RUN apt-get update \
-  && apt-get install -y wget make devscripts build-essential git curl automake autoconf expect sudo apt-utils reprepro
+  && apt-get install -y wget make devscripts build-essential git curl automake autoconf expect sudo apt-utils reprepro equivs
 
 # Remove requiretty from sudoers main file
 RUN sed -i '/Defaults    requiretty/c\#Defaults    requiretty' /etc/sudoers
