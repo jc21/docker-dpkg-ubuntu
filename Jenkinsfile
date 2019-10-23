@@ -7,9 +7,9 @@ pipeline {
   environment {
     IMAGE      = "dpkg-ubuntu"
     TEMP_IMAGE = "${IMAGE}_${BUILD_NUMBER}"
-    TAG        = "19.10"
-    TAG2       = "eoan"
-    TAG3       = "latest"
+    TAG        = "19.10-rust"
+    TAG2       = "eoan-rust"
+    TAG3       = "latest-rust"
   }
   stages {
     stage('Build') {
@@ -45,8 +45,6 @@ pipeline {
   }
   post {
     success {
-      //build job: 'Docker/docker-dpkg-debian10/golang', wait: false
-      //build job: 'Docker/docker-dpkg-debian10/rust', wait: false
       juxtapose event: 'success'
       sh 'figlet "SUCCESS"'
     }
