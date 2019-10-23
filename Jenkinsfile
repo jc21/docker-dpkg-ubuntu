@@ -8,7 +8,7 @@ pipeline {
     IMAGE      = "dpkg-ubuntu"
     TEMP_IMAGE = "${IMAGE}_${BUILD_NUMBER}"
     TAG        = "19.10-golang"
-    TAG2       = "eoan-golan"
+    TAG2       = "eoan-golang"
     TAG3       = "latest-golang"
   }
   stages {
