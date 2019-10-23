@@ -1,29 +1,15 @@
-FROM ubuntu:eoan
+FROM jc21/dpkg-ubuntu:eoan
 
 MAINTAINER Jamie Curnow <jc@jc21.com>
 LABEL maintainer="Jamie Curnow <jc@jc21.com>"
 
-ENV DEBIAN_FRONTEND=noninteractive
+USER root
 
-# Apt
-RUN apt-get update \
-  && apt-get install -y wget make devscripts build-essential git curl automake autoconf expect sudo apt-utils reprepro equivs apt-transport-https jq zip dh-make debhelper
-
-RUN apt-get update \
-  && apt-get install -y git \
-  && apt-get clean
-
-# Remove requiretty from sudoers main file
-RUN sed -i '/Defaults    requiretty/c\#Defaults    requiretty' /etc/sudoers
-
-# Rpm User
-RUN useradd -G sudo builder \
-    && mkdir -p /home/builder \
-    && chmod -R 777 /home/builder
-
-# Sudo
-ADD etc/sudoers.d/builder /etc/sudoers.d/
-RUN chown root:root /etc/sudoers.d/*
+RUN apt-get install -y golang-1.13
 
 USER builder
-WORKDIR /home/builder
+
+# installed in /usr/lib/go-1.13
+ENV GOROOT=/usr/lib/go-1.13
+ENV GOPATH=/home/builder/go
+ENV PATH="/usr/lib/go-1.13/bin:/home/builder/go/bin:${PATH}"
